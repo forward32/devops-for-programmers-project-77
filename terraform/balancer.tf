@@ -16,14 +16,14 @@ resource "digitalocean_loadbalancer" "hexlet-lb" {
     entry_port     = 443
     entry_protocol = "https"
 
-    target_port     = 80
+    target_port     = 3000
     target_protocol = "http"
 
     certificate_name = digitalocean_certificate.cert.name
   }
 
   healthcheck {
-    port     = 80
+    port     = 3000
     protocol = "http"
     path     = "/"
   }
