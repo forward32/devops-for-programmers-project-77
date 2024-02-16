@@ -1,0 +1,7 @@
+datadog_api_key: "{{ vault_datadog_api_key }}"
+datadog_site: ap1.datadoghq.com
+datadog_checks:
+  http_check:
+    instances:
+      - name: redmine instance
+        url: http://localhost:3000
