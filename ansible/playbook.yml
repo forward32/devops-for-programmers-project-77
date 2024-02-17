@@ -7,14 +7,12 @@
         cache_valid_time: 604800 # 1 week
       tags:
         - setup
-
     - name: Ignore PEP 668 because it's silly.
       ansible.builtin.file:
         path: /usr/lib/python3.11/EXTERNALLY-MANAGED
         state: absent
       tags:
         - setup
-
     - name: pip
       pip:
         name: docker
@@ -27,6 +25,8 @@
         image: redmine
         published_ports: 3000:3000
       become: yes
+      tags:
+        - redmine
 
     - name: start datadog
       import_role:
@@ -35,11 +35,11 @@
       tags:
         - datadog
 
-- hosts: webservers
+- hosts: localhost
   tasks:
-    - name: start datadog
-      import_role:
-        name: datadog.datadog
-      become: yes
+    - name: terraform secrets
+      template:
+        src: secrets.auto.tfvars.j2
+        dest: '../terraform/secrets.auto.tfvars'
       tags:
-        - datadog
+        - terraform
