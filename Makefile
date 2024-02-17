@@ -10,6 +10,9 @@ datadog:
 secrets:
 	ansible-playbook ansible/playbook.yml --tags "terraform" --vault-password-file ansible/vault-password-file
 
+login:
+	terraform -chdir=terraform login
+
 init:
 	terraform -chdir=terraform init
 
